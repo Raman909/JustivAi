@@ -57,12 +57,27 @@
   }
 }
 
+.app-bg {
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.app-bg-overlay {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.dark .app-bg-overlay {
+  background-color: rgba(17, 24, 39, 0.85);
+}
+
 .auth-background {
-  background-image: radial-gradient(circle at 1px 1px, #6366f1 1px, transparent 0);
-  background-size: 40px 40px;
-  background-position: -19px -19px;
+  /* removed pattern to allow main background to show */
+  background-color: transparent !important;
 }
 
 .dark .auth-background {
-  background-image: radial-gradient(circle at 1px 1px, #818cf8 1px, transparent 0);
+  background-color: transparent !important;
 }

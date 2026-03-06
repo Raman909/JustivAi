@@ -33,32 +33,34 @@ function App() {
     <AuthProvider>
       <ThemeProvider>
         <Router>
-          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-all duration-300 ease-in-out">
-            <div className="relative z-10">
-              {/* ✅ Only show Navbar when authenticated */}
-              <AuthConsumerWrapper>
-                <Navbar />
-              </AuthConsumerWrapper>
+          <div className="min-h-screen app-bg text-gray-900 dark:text-gray-100 transition-all duration-300 ease-in-out">
+            <div className="min-h-screen app-bg-overlay">
+              <div className="relative z-10">
+                {/* ✅ Only show Navbar when authenticated */}
+                <AuthConsumerWrapper>
+                  <Navbar />
+                </AuthConsumerWrapper>
 
-              <main className="page-transition">
-                <Routes>
-                  {/* ✅ Default path redirects to login */}
-                  <Route path="/" element={<Navigate to="/login" replace />} />
+                <main className="page-transition">
+                  <Routes>
+                    {/* ✅ Default path redirects to login */}
+                    <Route path="/" element={<Navigate to="/login" replace />} />
 
-                  {/* ✅ Public routes (no auth) */}
-                  <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-                  <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+                    {/* ✅ Public routes (no auth) */}
+                    <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+                    <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
 
-                  {/* ✅ Private routes (auth required) */}
-                  <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-                  <Route path="/chatbot" element={<PrivateRoute><Chatbot /></PrivateRoute>} />
-                  <Route path="/summarization" element={<PrivateRoute><DataSummarization /></PrivateRoute>} />
-                  <Route path="/prediction" element={<PrivateRoute><PredictiveAnalysis /></PrivateRoute>} />
+                    {/* ✅ Private routes (auth required) */}
+                    <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+                    <Route path="/chatbot" element={<PrivateRoute><Chatbot /></PrivateRoute>} />
+                    <Route path="/summarization" element={<PrivateRoute><DataSummarization /></PrivateRoute>} />
+                    <Route path="/prediction" element={<PrivateRoute><PredictiveAnalysis /></PrivateRoute>} />
 
-                  {/* ✅ Fallback for unknown paths */}
-                  <Route path="*" element={<Navigate to="/login" replace />} />
-                </Routes>
-              </main>
+                    {/* ✅ Fallback for unknown paths */}
+                    <Route path="*" element={<Navigate to="/login" replace />} />
+                  </Routes>
+                </main>
+              </div>
             </div>
           </div>
         </Router>

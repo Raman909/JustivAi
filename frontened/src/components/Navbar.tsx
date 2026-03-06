@@ -27,7 +27,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <Scale className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-              <span className="text-xl font-bold text-gray-900 dark:text-white">JustifAI</span>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">AI-Based Lawyer</span>
             </Link>
           </div>
           

@@ -241,7 +241,6 @@ def serve_frontend():
     return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
     logger.info(f"Starting server on port {port}")
     try:
         app.run(host='0.0.0.0', port=port, debug=True)

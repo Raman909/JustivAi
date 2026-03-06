@@ -27,7 +27,7 @@ const PredictiveAnalysis = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/predict', {
+      const response = await axios.post('http://localhost:8383/predict', {
         father_salary: parseFloat(fatherSalary),
         mother_salary: parseFloat(motherSalary),
         divorce_status: divorceStatus,
@@ -156,7 +156,7 @@ const PredictiveAnalysis = () => {
               </div>
               <div>
                 <h3 className="font-medium text-gray-700 dark:text-gray-300">Estimated Compensation:</h3>
-                <p className="text-lg text-gray-900 dark:text-white">${prediction.compensation.toLocaleString()}</p>
+                <p className="text-lg text-gray-900 dark:text-white">₹{(prediction.compensation * 90).toLocaleString('en-IN')}</p>
               </div>
               {prediction.similar_cases && prediction.similar_cases.length > 0 && (
                 <div>

@@ -1,199 +1,85 @@
-JustifAi – AI-Based Lawyer
+# AI-Based Lawyer (Formerly JustifAI)
 
-An AI-powered legal assistant combining a React (Vite + TypeScript + Tailwind) frontend with a Flask-based backend for PDF case summarization and predictive analysis (custody and compensation). The backend can also serve a prebuilt frontend for simple single-container deployments.
+## Our Mission: Justice as a Right, Not a Luxury
+In a world where legal representation is often tied to financial capability, the scales of justice can sometimes tilt in favor of those who can afford it. The **AI-Based Lawyer** was built on the core moral principle that everyone deserves access to fair, objective, and immediate legal insight, regardless of their background or financial standing. 
 
-## Features
-- PDF upload and automatic case summarization (NLTK + TF‑IDF)
-- Predictive analysis for custody and compensation (scikit‑learn)
-- Authentication and theming scaffolded on the frontend (Firebase ready)
-- Docker support for one-command deployment (Gunicorn + Flask)
+Legal matters, particularly family law (like divorce and custody), are deeply emotional and exhausting. Our goal is to alleviate this burden by offering a purely data-driven, non-judgmental analysis that provides clarity in times of vulnerability.
 
-## Tech Stack
-- Backend: Flask, scikit‑learn, pandas, NLTK, Gunicorn
-- Frontend: React, Vite, TypeScript, TailwindCSS, Firebase (optional)
-- Packaging: Docker (Python 3.10 slim)
+---
 
-## Repository Structure
+## What Makes This Project Different?
+While traditional legal consultations require scheduling, fees, and emotional toll, this project aims to provide:
+- **Objective Clarity:** By analyzing historical case data, the AI provides an unbiased look into probable outcomes. It removes human prejudice and emotional sway from the equation.
+- **Immediate Empowerment:** Instead of waiting weeks for a preliminary analysis, individuals can immediately understand the key legal points of their case documents.
+- **Accessibility:** Empowering ordinary citizens to understand complex legal jargon and expected compensation without spending exorbitant fees on day one.
+
+---
+
+## How to Use the AI-Based Lawyer
+Using the application is straightforward and designed for non-technical users seeking guidance:
+1. **Case Summarization:** Simply upload your legal PDF documents. The AI instantly reads through the complex legalese and provides a clear, bulleted summary of the core facts.
+2. **Outcome Prediction:** Fill in a few baseline details about your scenario (e.g., salaries, reason for separation). The AI compares your data against thousands of similar historical cases to predict:
+   - Who is most likely to receive custody.
+   - What the estimated compensation will be (calculated in ₹ Rupees).
+3. **Chatbot Assistance:** Chat directly with the AI for any general legal queries. *(Coming Soon / Active Integration)*
+
+---
+
+## The AI Behind the Predictions
+To provide the most accurate and unbiased insights, this platform relies on a sophisticated machine learning pipeline:
+
+### The Dataset
+Our models are trained on `Modified_Final_Database.xlsx`, a comprehensive dataset of anonymized historical family law cases. The dataset includes critical features such as:
+- **Financial Standing** (Father's Salary, Mother's Salary)
+- **Family Dynamics** (Child's Age)
+- **Case Background** (Divorce Status, Reason for Divorce)
+- **Historical Outcomes** (Granted Custody, Compensation Amount)
+
+### The Methodology & Models
+When a user submits their case details, the backend (built with Python, scikit-learn, and pandas) processes the data through a rigorous pipeline:
+1. **Data Preprocessing:** Categorical data (like the Reason for Divorce) is transformed using *One-Hot Encoding*, while numerical data (Salaries, Child Age) is normalized using a *StandardScaler*. This ensures the AI weighs all factors fairly.
+2. **Custody Prediction (Classification):** We utilize a **Random Forest Classifier** to predict categorical outcomes (e.g., whether the Mother, Father, or Both receive custody). This model builds multiple decision trees during training and merges them together to get a more accurate and stable prediction.
+3. **Compensation Estimation (Regression):** For financial predictions, we use a **Random Forest Regressor**. Rather than outputting a category, it calculates a continuous numerical value—representing the estimated base compensation—which the frontend then automatically converts to Indian Rupees.
+
+By leveraging these ensemble learning methods, the AI minimizes human bias, avoids overfitting, and provides an objective baseline drawn directly from historical legal precedents.
+
+---
+
+## Scaling for Impact
+Currently, this AI serves as a guiding tool for family law, but its potential scale is massive:
+- **Pro-Bono Law Firm Integration:** We aim to offer this tool to non-profit legal aid societies. They can use the summarizer to process case files 10x faster, allowing them to help more underprivileged clients.
+- **Multilingual Support:** Justice shouldn't be limited to English speakers. Scaling the natural language processing to understand regional languages will democratize legal access for millions in rural areas.
+- **Integration with Courts:** In the future, this system could be used by junior magistrates to quickly reference precedents, drastically reducing the massive backlog of pending cases in the justice system.
+
+---
+
+## Future Plans
+Our roadmap is driven by social impact:
+- **Expansion of Legal Domains:** Moving beyond family law to include tenant-landlord disputes, labor laws, and consumer rights.
+- **Empathy Engine:** Refining the AI's communication style so that when delivering difficult predictions, it uses supportive, trauma-informed language.
+- **Verified Legal Partner Handoff:** If a case is predicted to be highly complex, the app will securely and seamlessly hand off the summarized data to verified pro-bono human lawyers.
+
+---
+
+## Technical Quick-Start
+*(For developers looking to contribute to our mission)*
+
+**1. Clone the repository**
+```bash
+git clone https://github.com/Raman909/JustivAi.git
 ```
-JustifAi-AI-Based-Lawyer-main/
-  backened/                 # Flask app (note the folder name)
-    check.py                # Main app entry
-    requirements.txt        # Python dependencies
-    static/                 # Prebuilt frontend (served by Flask)
-    models/                 # Trained model artifacts (.pkl)
-    uploads/                # Temp uploads
-    data/                   # Training/feature data (xlsx)
-  frontened/                # React + Vite + TypeScript app (note the folder name)
-    src/                    # Components, context, Firebase config
-    package.json            # Frontend dependencies & scripts
-  data/                     # Dataset copy
-  Dockerfile                # One-container deploy
-```
 
-## Prerequisites
-- Python 3.10+ (for backend)
-- Node.js 18+ and npm (for frontend dev/build)
-- Git (to version and push)
-- Docker (optional, for containerized run)
-
-## Backend – Local Setup (Flask)
-On Windows PowerShell:
+**2. Start the Backend (Port 8383)**
 ```powershell
 cd backened
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-# (Optional) Ensure NLTK data is available
-python -m nltk.downloader punkt
-
-# Run the server (development)
 python check.py
 ```
-Default dev URL: `http://localhost:5000`
 
-Environment variables:
-- `PORT` (optional): Flask will use this if set; default is 5000 in `check.py`. Docker uses 10000 (see Docker section).
-
-### Backend API Endpoints
-- `POST /upload` – multipart form-data with `file` (PDF). Returns JSON `{ summary, filename }`.
-- `POST /predict` – JSON body:
-  ```json
-  {
-    "father_salary": 50000,
-    "mother_salary": 25000,
-    "divorce_status": "Divorced",
-    "reason_for_divorce": "Incompatibility",
-    "child_age": 7
-  }
-  ```
-  Response:
-  ```json
-  { "custody": "Mother", "compensation": 12345.67 }
-  ```
-
-### Sample cURL
-```bash
-# Summarization
-curl -X POST http://localhost:5000/upload \
-  -F "file=@/path/to/document.pdf"
-
-# Prediction
-curl -X POST http://localhost:5000/predict \
-  -H "Content-Type: application/json" \
-  -d '{
-    "father_salary": 50000,
-    "mother_salary": 25000,
-    "divorce_status": "Divorced",
-    "reason_for_divorce": "Incompatibility",
-    "child_age": 7
-  }'
-```
-
-## Frontend – Local Setup (React + Vite + TS)
+**3. Start the Frontend**
 ```powershell
 cd frontened
 npm install
-
-# Start dev server (usually http://localhost:5173)
 npm run dev
-
-# Build for production (outputs dist/)
-npm run build
 ```
 
-Environment configuration:
-- If you use a custom backend URL, create `frontened/.env` with e.g.:
-  ```
-  VITE_API_BASE_URL=http://localhost:5000
-  ```
-- Firebase credentials live in `frontened/src/config/firebase.ts`. Prefer using envs and do not commit secrets.
-
-Serving the frontend:
-- Option A (separate): run frontend dev on port 5173 and backend on 5000 (CORS is enabled on Flask).
-- Option B (single container): build the frontend and copy its build into `backened/static/` so Flask serves it.
-
-## Docker – One-Container Build & Run
-The Dockerfile is set to serve the Flask app via Gunicorn on port 10000 and expects prebuilt or existing static files in `backened/static/`.
-
-```bash
-# From repository root
-docker build -t justifai .
-docker run -p 10000:10000 --name justifai --rm justifai
-```
-
-Then open `http://localhost:10000`.
-
-Notes:
-- Docker installs Python dependencies, downloads NLTK `punkt`, and starts Gunicorn: `backened.check:app`.
-- If you want the latest frontend in the container, build the frontend locally and ensure the build output is present in `backened/static/` before building the image, or extend the Dockerfile to build the frontend.
-
-## Model Artifacts & Data
-- Trained models are saved under `backened/models/` (`custody_model.pkl`, `comp_model.pkl`).
-- The backend can train them automatically if missing, using `backened/data/Modified_Final_Database.xlsx`.
-- Consider using Git LFS for large `.pkl` and `.xlsx` files.
-
-## Recommended .gitignore
-Create a `.gitignore` at the repository root with:
-```
-# Python
-.venv/
-__pycache__/
-*.py[cod]
-
-# Node
-frontened/node_modules/
-frontened/.vite/
-frontened/dist/
-
-# App artifacts
-backened/uploads/
-backened/models/*.pkl
-*.xlsx
-
-# Env & secrets
-.env
-*.env.local
-```
-
-## GitHub – Upload Steps
-1. Initialize and commit locally
-   ```powershell
-   git init
-   git add .
-   git commit -m "chore: initial commit for JustifAi"
-   ```
-2. Create a new GitHub repository (via GitHub UI). Copy the remote URL.
-3. Add remote and push
-   ```powershell
-   git remote add origin https://github.com/<your-user>/<your-repo>.git
-   git branch -M main
-   git push -u origin main
-   ```
-4. (Optional) Configure Git LFS for large files
-   ```powershell
-   git lfs install
-   git lfs track "backened/models/*.pkl"
-   git lfs track "*.xlsx"
-   git add .gitattributes
-   git add backened/models/*.pkl data/*.xlsx || echo Skipping if not present
-   git commit -m "chore: track model and data with LFS"
-   git push
-   ```
-5. Add a license (MIT or your choice) and description/badges on GitHub.
-6. Protect your secrets: never commit API keys; use `.env` and GitHub Actions secrets.
-
-## Deployment Options
-- Docker on any VM or container platform
-- Railway, Render, Fly.io, Heroku‑like (use Dockerfile or Procfile equivalents)
-- GitHub Actions for CI/CD (build Docker image, push to registry, deploy)
-
-## Troubleshooting
-- Port conflicts: change `PORT` or container port mapping.
-- NLTK `punkt` not found: run `python -m nltk.downloader punkt`.
-- CORS issues: backend already enables CORS via `flask-cors`.
-- Missing models/data: ensure `backened/data/Modified_Final_Database.xlsx` exists so training can run.
-
-## License
-Add your preferred license (e.g., MIT) as `LICENSE` in the repository root.
-
-
+*Join us in making justice accessible to all.*

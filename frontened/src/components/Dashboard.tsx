@@ -5,9 +5,9 @@ import { MessageSquare, FileText, Scale } from 'lucide-react';
 const Dashboard = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Welcome to JustifAI</h1>
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300">Welcome to AI-Based Lawyer</h1>
       <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300">Your intelligent legal assistant powered by AI</p>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <Link to="/chatbot" className="group transform hover:scale-105 transition-all duration-300 ease-in-out">
           <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 border border-transparent hover:border-indigo-500 dark:hover:border-indigo-400 transition-all duration-300">
@@ -41,7 +41,7 @@ const Dashboard = () => {
       </div>
 
       <div className="mt-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 transition-all duration-300">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">How JustifAI Works</h2>
+        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">How AI-Based Lawyer Works</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="group">
             <div className="flex items-center justify-center w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-full mb-4 group-hover:bg-indigo-200 dark:group-hover:bg-indigo-900/50 transition-colors duration-300">

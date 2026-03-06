@@ -33,11 +33,11 @@ const Login = () => {
       >
         {isDark ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}
       </button>
-      
+
       <div className="max-w-md w-full space-y-8">
         <div className="text-center animate-float">
           <Scale className="mx-auto h-12 w-12 text-indigo-600 dark:text-indigo-400" />
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Sign in to JustifAI</h2>
+          <h2 className="mt-6 text-3xl font-extrabold text-gray-900 dark:text-white">Sign in to AI-Based Lawyer</h2>
         </div>
         <form className="mt-8 space-y-6 animate-gradient p-8 rounded-lg shadow-xl backdrop-blur-sm bg-white/80 dark:bg-gray-800/80" onSubmit={handleSubmit}>
           {error && (
