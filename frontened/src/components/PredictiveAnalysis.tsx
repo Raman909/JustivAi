@@ -27,7 +27,7 @@ const PredictiveAnalysis = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8383/predict', {
+      const response = await axios.post('http://localhost:5000/predict', {
         father_salary: parseFloat(fatherSalary),
         mother_salary: parseFloat(motherSalary),
         divorce_status: divorceStatus,

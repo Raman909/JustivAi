@@ -1,7 +1,7 @@
-# AI-Based Lawyer (Formerly JustifAI)
+# Legal AI
 
 ## Our Mission: Justice as a Right, Not a Luxury
-In a world where legal representation is often tied to financial capability, the scales of justice can sometimes tilt in favor of those who can afford it. The **AI-Based Lawyer** was built on the core moral principle that everyone deserves access to fair, objective, and immediate legal insight, regardless of their background or financial standing. 
+In a world where legal representation is often tied to financial capability, the scales of justice can sometimes tilt in favor of those who can afford it. **Legal AI** was built on the core moral principle that everyone deserves access to fair, objective, and immediate legal insight, regardless of their background or financial standing. 
 
 Legal matters, particularly family law (like divorce and custody), are deeply emotional and exhausting. Our goal is to alleviate this burden by offering a purely data-driven, non-judgmental analysis that provides clarity in times of vulnerability.
 
@@ -15,7 +15,7 @@ While traditional legal consultations require scheduling, fees, and emotional to
 
 ---
 
-## How to Use the AI-Based Lawyer
+## How to Use Legal AI
 Using the application is straightforward and designed for non-technical users seeking guidance:
 1. **Case Summarization:** Simply upload your legal PDF documents. The AI instantly reads through the complex legalese and provides a clear, bulleted summary of the core facts.
 2. **Outcome Prediction:** Fill in a few baseline details about your scenario (e.g., salaries, reason for separation). The AI compares your data against thousands of similar historical cases to predict:
@@ -66,10 +66,10 @@ Our roadmap is driven by social impact:
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/Raman909/JustivAi.git
+git clone https://github.com/Raman909/Legal-AI.git
 ```
 
-**2. Start the Backend (Port 8383)**
+**2. Start the Backend (Port 5000)**
 ```powershell
 cd backened
 python check.py
